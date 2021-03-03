@@ -168,10 +168,10 @@ def detection(image):
     st.image(img_to_detect, use_column_width=True)
 
 EXTERNAL_DEPENDENCIES = {
-    # "bp_yolov4_best.weights": {
-    #     "url": "https://p-def7.pcloud.com/cfZGyP4TsZu6NJN9ZPrOR7ZZMrzCG7Z2ZZPwJZZCjR1mZyVZdpZq5ZwHZHkZ77Z6ZFHZf5ZjJZ0zZcpZtJZ3FZi8bBza6CxwJGinDyL7rEw5LSO2Pk/bp_yolov4_best.weights",
-    #     "size": 256080600
-    # },
+    "bp_yolov4_best.weights": {
+        "url": "https://p-def7.pcloud.com/cBZGyP4TsZu6NJN9ZPrOR7ZZnKRCG7Z2ZZPwJZkZCjR1mZyVZdpZq5ZwHZHkZ77Z6ZFHZf5ZjJZ0zZcpZtJZ3FZXjXfXZSELV9iOUpySfbHP6WR6k5QOQF67X/bp_yolov4_best.weights",
+        "size": 256080600
+    },
     "bp_yolov4.cfg": {
         "url": "https://raw.githubusercontent.com/chunmusic/How-you-like-that/master/bp_yolov4.cfg",
         "size": 12223
