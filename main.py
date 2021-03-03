@@ -22,11 +22,12 @@ def main():
         img_array = np.array(image)
         img_cv = cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR)
         
-        for filename in EXTERNAL_DEPENDENCIES.keys():
-            download_file(filename)
+        # for filename in EXTERNAL_DEPENDENCIES.keys():
+        #     download_file(filename)
 
-        detection(img_cv)
-
+        # detection(img_cv)
+        
+        st.image(image_cv, use_column_width=True)
 
 @st.cache(show_spinner=False)
 def get_file_content_as_string(path):
