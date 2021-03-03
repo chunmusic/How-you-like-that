@@ -74,7 +74,7 @@ def download_file(file_path):
         if progress_bar is not None:
             progress_bar.empty()
 
-
+@st.cache
 def detection(image):
 
     img_to_detect = image
