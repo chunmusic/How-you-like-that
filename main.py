@@ -170,7 +170,7 @@ def detection(image):
 
 EXTERNAL_DEPENDENCIES = {
     "bp_yolov4_best.weights": {
-        "url": "https://p-def7.pcloud.com/cBZGyP4TsZu6NJN9ZPrOR7ZZnKRCG7Z2ZZPwJZkZCjR1mZyVZdpZq5ZwHZHkZ77Z6ZFHZf5ZjJZ0zZcpZtJZ3FZXjXfXZSELV9iOUpySfbHP6WR6k5QOQF67X/bp_yolov4_best.weights",
+        "url": "https://sandbox.zenodo.org/record/740192/files/bp_yolov4_best.weights",
         "size": 256080600
     },
     "bp_yolov4.cfg": {
