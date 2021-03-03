@@ -28,7 +28,6 @@ def main():
         detection(img_cv)
 
 
-
 @st.cache(show_spinner=False)
 def get_file_content_as_string(path):
     url = 'https://raw.githubusercontent.com/chunmusic/How-you-like-that/master/' + path
@@ -144,12 +143,10 @@ def detection(image):
         predicted_class_id = class_ids_list[max_class_id]
         predicted_class_label = class_labels[predicted_class_id]
         prediction_confidence = confidences_list[max_class_id]
-        
-
+    
         
         end_x_pt = start_x_pt + box_width
         end_y_pt = start_y_pt + box_height
-        
         
         #get a random mask color from the numpy array of colors
         box_color = class_colors[predicted_class_id]
@@ -161,17 +158,10 @@ def detection(image):
         predicted_class_label = "{}: {:.2f}%".format(predicted_class_label, prediction_confidence * 100)
         # print("predicted object {}".format(predicted_class_label))
         
-
-
         # draw rectangle and text in the image
         cv2.rectangle(img_to_detect, (start_x_pt, start_y_pt), (end_x_pt, end_y_pt), box_color, 4)
         cv2.putText(img_to_detect, predicted_class_label, (start_x_pt, start_y_pt-5), cv2.FONT_HERSHEY_SIMPLEX, 1, box_color, 4)
 
-    # image_output = Image.open(img_to_detect)
-
-    # image = Image.open('test_img/bp0.jpg')
-
-    # st.image(img_out, caption='Sunrise by the mountains', use_column_width=True)
 
     img_to_detect = cv2.cvtColor(img_to_detect,cv2.COLOR_BGR2RGB)
 
@@ -179,7 +169,7 @@ def detection(image):
 
 EXTERNAL_DEPENDENCIES = {
     "bp_yolov4_best.weights": {
-        "url": "https://github.com/chunmusic/How-you-like-that/raw/master/bp_yolov4_best.weights",
+        "url": "https://p-def7.pcloud.com/cfZGyP4TsZu6NJN9ZPrOR7ZZMrzCG7Z2ZZPwJZZCjR1mZyVZdpZq5ZwHZHkZ77Z6ZFHZf5ZjJZ0zZcpZtJZ3FZi8bBza6CxwJGinDyL7rEw5LSO2Pk/bp_yolov4_best.weights",
         "size": 256080600
     },
     "bp_yolov4.cfg": {
