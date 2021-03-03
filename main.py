@@ -18,6 +18,8 @@ def main():
 
     if uploaded_file is not None:
 
+        img_cv = None
+
         image = Image.open(uploaded_file)
         img_array = np.array(image)
         img_cv = cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR)
@@ -27,9 +29,9 @@ def main():
 
         img_out = detection(img_cv)
 
-    img_to_detect = cv2.cvtColor(img_out,cv2.COLOR_BGR2RGB)
+        img_to_detect = cv2.cvtColor(img_out,cv2.COLOR_BGR2RGB)
 
-    st.image(img_to_detect, use_column_width=True)
+        st.image(img_to_detect, use_column_width=True)
 
 @st.cache(show_spinner=False)
 def get_file_content_as_string(path):
