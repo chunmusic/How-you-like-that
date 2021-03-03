@@ -25,9 +25,11 @@ def main():
         for filename in EXTERNAL_DEPENDENCIES.keys():
             download_file(filename)
 
-        detection(img_cv)
+        img_out = detection(img_cv)
 
-        # st.image(img_cv, use_column_width=True)
+    img_to_detect = cv2.cvtColor(img_out,cv2.COLOR_BGR2RGB)
+
+    st.image(img_to_detect, use_column_width=True)
 
 @st.cache(show_spinner=False)
 def get_file_content_as_string(path):
@@ -164,9 +166,10 @@ def detection(image):
         cv2.putText(img_to_detect, predicted_class_label, (start_x_pt, start_y_pt-5), cv2.FONT_HERSHEY_SIMPLEX, 1, box_color, 4)
 
 
-    img_to_detect = cv2.cvtColor(img_to_detect,cv2.COLOR_BGR2RGB)
+    return img_to_detect
+    # img_to_detect = cv2.cvtColor(img_to_detect,cv2.COLOR_BGR2RGB)
 
-    st.image(img_to_detect, use_column_width=True)
+    # st.image(img_to_detect, use_column_width=True)
 
 EXTERNAL_DEPENDENCIES = {
     "bp_yolov4_best.weights": {
