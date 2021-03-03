@@ -26,8 +26,8 @@ def main():
         #     download_file(filename)
 
         # detection(img_cv)
-        
-        st.image(image_cv, use_column_width=True)
+
+        st.image(img_cv, use_column_width=True)
 
 @st.cache(show_spinner=False)
 def get_file_content_as_string(path):
