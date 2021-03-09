@@ -6,7 +6,7 @@ import footer
 import os, urllib, cv2
 from PIL import Image
 import sys
-sys.setrecursionlimit(1500)
+print(sys.getrecursionlimit())
 
 def main():
 
