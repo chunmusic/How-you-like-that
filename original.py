@@ -36,8 +36,6 @@ boxes_list = []
 confidences_list = []
 
 
-
-
 for object_detection_layer in obj_detection_layers:
 	# loop over the detections
     for object_detection in object_detection_layer:

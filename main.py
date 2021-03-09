@@ -7,16 +7,38 @@ import os, urllib, cv2
 from PIL import Image
 
 def main():
-    
+
     st.title("HOW YOU LIKE THAT!!!")
-    st.sidebar.markdown("# Model")
+
+    hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+
+            .reportview-container .main .block-container{{
+                max-width: {max_width}px;
+                padding-top: {padding_top}rem;
+                padding-right: {padding_right}rem;
+                padding-left: {padding_left}rem;
+                padding-bottom: {padding_bottom}rem;
+            }}
+            .reportview-container .main {{
+                color: {COLOR};
+                background-color: {BACKGROUND_COLOR};
+            }}
+
+            </style>
+            """
+
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
     
     readme_text = st.markdown(get_file_content_as_string("instructions.md"))
 
     uploaded_file = st.file_uploader("Upload Image")
 
+    uploaded_file_old = None
 
-    if uploaded_file is not None:
+    if uploaded_file is not None and (uploaded_file_old != uploaded_file):
 
         img_cv = None
 
@@ -27,11 +49,26 @@ def main():
         for filename in EXTERNAL_DEPENDENCIES.keys():
             download_file(filename)
 
-        img_out = detection(img_cv)
+        img_out, print_label, print_confidence = detection(img_cv)
 
         img_to_detect = cv2.cvtColor(img_out,cv2.COLOR_BGR2RGB)
 
         st.image(img_to_detect, use_column_width=True)
+
+        uploaded_file_old = uploaded_file
+
+        st.write(" ")
+
+
+        if len(print_label) == len(print_confidence):
+            
+            for i in range(len(print_label)):
+                st.write("You're like: {} {:.2f}%".format(print_label[i],print_confidence[i]*100))
+
+        else:
+            pass
+
+
 
 @st.cache(show_spinner=False)
 def get_file_content_as_string(path):
@@ -109,6 +146,9 @@ def detection(image):
     boxes_list = []
     confidences_list = []
 
+    print_predict_label = []
+    print_predict_confidence = []
+    
     for object_detection_layer in obj_detection_layers:
         # loop over the detections
         for object_detection in object_detection_layer:
@@ -148,7 +188,10 @@ def detection(image):
         predicted_class_id = class_ids_list[max_class_id]
         predicted_class_label = class_labels[predicted_class_id]
         prediction_confidence = confidences_list[max_class_id]
-    
+
+        #For printing confidence value:
+        print_predict_label.append(predicted_class_label)
+        print_predict_confidence.append(prediction_confidence)
         
         end_x_pt = start_x_pt + box_width
         end_y_pt = start_y_pt + box_height
@@ -168,10 +211,9 @@ def detection(image):
         cv2.putText(img_to_detect, predicted_class_label, (start_x_pt, start_y_pt-5), cv2.FONT_HERSHEY_SIMPLEX, 1, box_color, 4)
 
 
-    return img_to_detect
-    # img_to_detect = cv2.cvtColor(img_to_detect,cv2.COLOR_BGR2RGB)
 
-    # st.image(img_to_detect, use_column_width=True)
+    return img_to_detect,print_predict_label,print_predict_confidence
+
 
 EXTERNAL_DEPENDENCIES = {
     "bp_yolov4_best.weights": {
@@ -185,4 +227,7 @@ EXTERNAL_DEPENDENCIES = {
 }
 
 if __name__ == "__main__":
+
     main()
+
+    footer.footer()
