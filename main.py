@@ -5,8 +5,6 @@ import streamlit as st
 import footer
 import os, urllib, cv2
 from PIL import Image
-import sys
-print(sys.getrecursionlimit())
 
 def main():
 
@@ -31,48 +29,47 @@ def main():
             """
 
     st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
-    
     readme_text = st.markdown(get_file_content_as_string("instructions.md"))
 
     uploaded_file = st.file_uploader("Upload Image")
 
-
     if (uploaded_file is not None):
 
         img_cv = None
-
         image = Image.open(uploaded_file)
 
-        img_array = np.array(image)
-        img_cv = cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR)
-        
-        for filename in EXTERNAL_DEPENDENCIES.keys():
-            download_file(filename)
+    else:
+        image = Image.open('test_img/bp3.jpg')
+    
 
-        img_out, print_label, print_confidence = detection(img_cv)
+    img_array = np.array(image)
+    img_cv = cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR)
+    
+    for filename in EXTERNAL_DEPENDENCIES.keys():
+        download_file(filename)
 
-        img_to_detect = cv2.cvtColor(img_out,cv2.COLOR_BGR2RGB)
+    img_out, print_label, print_confidence = detection(img_cv)
 
-        st.image(img_to_detect, use_column_width=True)
+    img_to_detect = cv2.cvtColor(img_out,cv2.COLOR_BGR2RGB)
 
-        uploaded_file = None
-        img_cv = None
-        image = None
-        img_array = None
+    st.image(img_to_detect, use_column_width=True)
 
-
-        st.write(" ")
-
-        if len(print_label)!=0:
-            if len(print_label) == len(print_confidence):
-                
-                for i in range(len(print_label)):
-                    st.write("You're like: {} {:.2f}%".format(print_label[i],print_confidence[i]*100))
-
-        else:
-            st.write("No one is like you")
+    uploaded_file = None
+    img_cv = None
+    image = None
+    img_array = None
 
 
+    st.write(" ")
+
+    if len(print_label)!=0:
+        if len(print_label) == len(print_confidence):
+            
+            for i in range(len(print_label)):
+                st.write("You're like: {} {:.2f}%".format(print_label[i],print_confidence[i]*100))
+
+    else:
+        st.write("No one is like you")
 
 
 @st.cache(show_spinner=False)
@@ -214,7 +211,6 @@ def detection(image):
         # draw rectangle and text in the image
         cv2.rectangle(img_to_detect, (start_x_pt, start_y_pt), (end_x_pt, end_y_pt), box_color, 4)
         cv2.putText(img_to_detect, predicted_class_label, (start_x_pt, start_y_pt-5), cv2.FONT_HERSHEY_SIMPLEX, 1, box_color, 4)
-
 
 
     return img_to_detect,print_predict_label,print_predict_confidence
