@@ -56,6 +56,10 @@ def main():
         st.image(img_to_detect, use_column_width=True)
 
         uploaded_file = None
+        img_cv = None
+        image = None
+        img_array = None
+
 
         st.write(" ")
 
