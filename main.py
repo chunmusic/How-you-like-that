@@ -5,6 +5,8 @@ import streamlit as st
 import footer
 import os, urllib, cv2
 from PIL import Image
+import sys
+sys.setrecursionlimit(1500)
 
 def main():
 
@@ -34,13 +36,13 @@ def main():
 
     uploaded_file = st.file_uploader("Upload Image")
 
-    uploaded_file_old = None
 
-    if (uploaded_file is not None) and (uploaded_file_old != uploaded_file):
+    if (uploaded_file is not None) and (uploaded_file != uploaded_file):
 
         img_cv = None
 
         image = Image.open(uploaded_file)
+
         img_array = np.array(image)
         img_cv = cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR)
         
@@ -53,7 +55,7 @@ def main():
 
         st.image(img_to_detect, use_column_width=True)
 
-        uploaded_file_old = uploaded_file
+        uploaded_file = None
 
         st.write(" ")
 
