@@ -1,4 +1,4 @@
-# Streamlit : HOW YOU LIKE THAT!!!!
+# HOW YOU LIKE THAT!!!!
 
 This project uses Yolo V4 framework for training thousands of Blackpink images and tries to anticipate people in the photo whom they are similar with.
 
