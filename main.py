@@ -37,7 +37,7 @@ def main():
     uploaded_file = st.file_uploader("Upload Image")
 
 
-    if (uploaded_file is not None) and (uploaded_file != uploaded_file):
+    if (uploaded_file is not None):
 
         img_cv = None
 
