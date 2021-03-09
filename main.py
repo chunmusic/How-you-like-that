@@ -34,11 +34,9 @@ def main():
 
     uploaded_file = st.file_uploader("Upload Image")
 
-    st.write("check1")
+    uploaded_file_old = None
 
-    if (uploaded_file is not None):
-
-        st.write("check2")
+    if (uploaded_file is not None) and (uploaded_file_old != uploaded_file):
 
         img_cv = None
 
@@ -46,8 +44,6 @@ def main():
         img_array = np.array(image)
         img_cv = cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR)
         
-        st.write("check3")
-
         for filename in EXTERNAL_DEPENDENCIES.keys():
             download_file(filename)
 
@@ -57,12 +53,9 @@ def main():
 
         st.image(img_to_detect, use_column_width=True)
 
-        uploaded_file = None
+        uploaded_file_old = uploaded_file
 
         st.write(" ")
-
-        st.write("check4")
-
 
         if len(print_label)!=0:
             if len(print_label) == len(print_confidence):
@@ -72,8 +65,6 @@ def main():
 
         else:
             st.write("No one is like you")
-
-        st.write("check5")
 
 
 
