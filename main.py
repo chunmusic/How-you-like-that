@@ -34,9 +34,8 @@ def main():
 
     uploaded_file = st.file_uploader("Upload Image")
 
-    uploaded_file_old = None
 
-    if uploaded_file is not None and (uploaded_file_old != uploaded_file):
+    if (uploaded_file is not None):
 
         img_cv = None
 
@@ -53,18 +52,19 @@ def main():
 
         st.image(img_to_detect, use_column_width=True)
 
-        uploaded_file_old = uploaded_file
+        uploaded_file = None
 
         st.write(" ")
 
-
-        if len(print_label) == len(print_confidence):
-            
-            for i in range(len(print_label)):
-                st.write("You're like: {} {:.2f}%".format(print_label[i],print_confidence[i]*100))
+        if len(print_label)!=0:
+            if len(print_label) == len(print_confidence):
+                
+                for i in range(len(print_label)):
+                    st.write("You're like: {} {:.2f}%".format(print_label[i],print_confidence[i]*100))
 
         else:
-            pass
+            st.write("No one is like you")
+
 
 
 
