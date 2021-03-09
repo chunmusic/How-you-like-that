@@ -8,8 +8,6 @@ from PIL import Image
 
 def main():
 
-    st.title("HOW YOU LIKE THAT!!!")
-
     hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
