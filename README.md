@@ -4,7 +4,7 @@
 
 - Images trained under YoloV4 framework.
 
-- Please refer to the website https://share.streamlit.io/chunmusic/fifa21_player_data/main.py
+- Please refer to the website https://share.streamlit.io/chunmusic/how-you-like-that/main.py
 
 ## Preview
 
